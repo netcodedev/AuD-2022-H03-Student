@@ -32,8 +32,8 @@ public class SelectionOfCharsIndex implements FunctionToInt<Character> {
     /**
      * Returns the index at which the given parameter is contained in the alphabet.
      *
-     * @param character                 The given parameter to be searched for.
-     * @return                          The index of the given parameter.
+     * @param character The given parameter to be searched for.
+     * @return The index of the given parameter.
      * @throws IllegalArgumentException Iff the given parameter is not contained in the alphabet.
      */
     @Override

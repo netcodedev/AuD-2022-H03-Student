@@ -20,8 +20,9 @@ public class Transition<T> {
 
     /**
      * Constructs a new Transition object with the given label j and given letters.
-     * @param j         The label of the state this transition leads to.
-     * @param letters   The letters that will make this transition lead to the next state (j).
+     *
+     * @param j       The label of the state this transition leads to.
+     * @param letters The letters that will make this transition lead to the next state (j).
      */
     public Transition(int j, List<T> letters) {
         throw new RuntimeException("H6 - not implemented"); // TODO: H6 - remove if implemented

@@ -23,9 +23,9 @@ public abstract class PartialMatchLengthUpdateValues<T> {
     /**
      * Returns the next state that will be entered when using the given letter from the given state.
      *
-     * @param state     The current state.
-     * @param letter    The letter to be added.
-     * @return          The next state.
+     * @param state  The current state.
+     * @param letter The letter to be added.
+     * @return The next state.
      */
     public abstract int getPartialMatchLengthUpdate(int state, T letter);
 
@@ -39,8 +39,8 @@ public abstract class PartialMatchLengthUpdateValues<T> {
     /**
      * Returns the amount of elements k in searchString so that the first k elements of searchString match the last k elements of searchString.
      *
-     * @param searchString  The searchString to search through.
-     * @return              The amount k.
+     * @param searchString The searchString to search through.
+     * @return The amount k.
      */
     protected int computePartialMatchLengthUpdateValues(T[] searchString) {
         throw new RuntimeException("H4 - not implemented"); // TODO: H4 - remove if implemented

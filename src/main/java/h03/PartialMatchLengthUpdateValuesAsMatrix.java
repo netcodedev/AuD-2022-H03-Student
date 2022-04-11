@@ -15,8 +15,8 @@ public class PartialMatchLengthUpdateValuesAsMatrix<T> extends PartialMatchLengt
      * Constructs a PartialMatchLengthUpdateValuesAsMatrix object with the given function and search string.
      * This is done by creating the private matrix of this object so that it may be used to look up next possible states.
      *
-     * @param fct           The function to be used.
-     * @param searchString  The search string to be used.
+     * @param fct          The function to be used.
+     * @param searchString The search string to be used.
      */
     public PartialMatchLengthUpdateValuesAsMatrix(FunctionToInt<T> fct, T[] searchString) {
         super(null);

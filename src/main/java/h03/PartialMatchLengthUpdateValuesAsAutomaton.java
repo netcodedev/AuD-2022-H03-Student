@@ -18,8 +18,8 @@ public class PartialMatchLengthUpdateValuesAsAutomaton<T> extends PartialMatchLe
      * Constructs a PartialMatchLengthUpdateValuesAsAutomaton object with the given function and search string.
      * This is done by creating the private array of this object by creating the various lists and their possible transitions to other states.
      *
-     * @param fct           The function to be used.
-     * @param searchString  The search string to be used.
+     * @param fct          The function to be used.
+     * @param searchString The search string to be used.
      */
     public PartialMatchLengthUpdateValuesAsAutomaton(FunctionToInt<T> fct, T[] searchString) {
         super(null);
@@ -27,7 +27,6 @@ public class PartialMatchLengthUpdateValuesAsAutomaton<T> extends PartialMatchLe
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override

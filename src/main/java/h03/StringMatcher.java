@@ -25,8 +25,8 @@ public class StringMatcher<T> {
     /**
      * Finds and returns all indices at which an occurrence of the search string (pre-processed with the update values object) starts in the given source.
      *
-     * @param source    The source string to search through.
-     * @return          The list of calculated indices.
+     * @param source The source string to search through.
+     * @return The list of calculated indices.
      */
     public List<Integer> findAllMatches(T[] source) {
         throw new RuntimeException("H7 - not implemented"); // TODO: H7 - remove if implemented
