@@ -17,7 +17,7 @@ public class EnumIndex<T extends Enum<T>> implements FunctionToInt<T> {
      * @param enumClass The enum to be used.
      */
     public EnumIndex(Class<T> enumClass) {
-        throw new RuntimeException("H3 - not implemented"); // TODO: H3 - remove if implemented
+        this.enumArray = enumClass.getEnumConstants();
     }
 
     /**
@@ -25,7 +25,7 @@ public class EnumIndex<T extends Enum<T>> implements FunctionToInt<T> {
      */
     @Override
     public int sizeOfAlphabet() {
-        throw new RuntimeException("H3 - not implemented"); // TODO: H3 - remove if implemented
+        return this.enumArray.length;
     }
 
     /**
@@ -37,6 +37,11 @@ public class EnumIndex<T extends Enum<T>> implements FunctionToInt<T> {
      */
     @Override
     public int apply(T t) throws IllegalArgumentException {
-        throw new RuntimeException("H3 - not implemented"); // TODO: H3 - remove if implemented
+        for(int i = 0; i<enumArray.length; i++){
+            if(enumArray[i] == t){
+                return i;
+            }
+        }
+        return -1;
     }
 }

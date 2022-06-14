@@ -10,7 +10,7 @@ public class UnicodeNumberOfCharIndex implements FunctionToInt<Character> {
      */
     @Override
     public int sizeOfAlphabet() {
-        throw new RuntimeException("H2 - not implemented"); // TODO: H2 - remove if implemented
+        return Character.MAX_VALUE+1;
     }
 
     /**
@@ -22,6 +22,6 @@ public class UnicodeNumberOfCharIndex implements FunctionToInt<Character> {
      */
     @Override
     public int apply(Character character) throws IllegalArgumentException {
-        throw new RuntimeException("H2 - not implemented"); // TODO: H2 - remove if implemented
+        return (int)character.charValue();
     }
 }

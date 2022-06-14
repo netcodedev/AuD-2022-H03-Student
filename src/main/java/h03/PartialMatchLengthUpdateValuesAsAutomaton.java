@@ -1,5 +1,7 @@
 package h03;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,9 +23,27 @@ public class PartialMatchLengthUpdateValuesAsAutomaton<T> extends PartialMatchLe
      * @param fct          The function to be used.
      * @param searchString The search string to be used.
      */
+    @SuppressWarnings("unchecked")
     public PartialMatchLengthUpdateValuesAsAutomaton(FunctionToInt<T> fct, T[] searchString) {
         super(null);
-        throw new RuntimeException("H6 - not implemented"); // TODO: H6 - remove if implemented
+        theStates = new List[searchString.length];
+        for(int i = 0; i<searchString.length; i++){
+            var transitions = new ArrayList<Transition<T>>();
+            for(int j = 0; j<searchString.length; j++){
+                if(i<searchString.length && searchString[i] == searchString[j]){
+                    transitions.add(new Transition<T>(i+1, Arrays.asList(searchString[j])));
+                } else {
+                    T[] substr = (T[])new Object[i+1];
+                    for(int k = 0; k<i;k++){
+                        substr[k] = searchString[k];
+                    }
+                    substr[i] = searchString[j];
+                    var match = computePartialMatchLengthUpdateValues(substr);
+                    transitions.add(new Transition<T>(match, Arrays.asList(searchString[j])));
+                }
+            }
+            theStates[i] = transitions;
+        }
     }
 
     /**
@@ -31,7 +51,15 @@ public class PartialMatchLengthUpdateValuesAsAutomaton<T> extends PartialMatchLe
      */
     @Override
     public int getPartialMatchLengthUpdate(int state, T letter) {
-        throw new RuntimeException("H6 - not implemented"); // TODO: H6 - remove if implemented
+        if(state >= theStates.length){
+            return 0;
+        }
+        for(var t : theStates[state]){
+            if(t.LETTERS.contains(letter)){
+                return t.J;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -39,6 +67,6 @@ public class PartialMatchLengthUpdateValuesAsAutomaton<T> extends PartialMatchLe
      */
     @Override
     public int getSearchStringLength() {
-        throw new RuntimeException("H7 - not implemented"); // TODO: H7 - remove if implemented
+        return theStates.length;
     }
 }

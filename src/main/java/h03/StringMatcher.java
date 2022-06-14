@@ -1,5 +1,7 @@
 package h03;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public class StringMatcher<T> {
      * @param values The update values for this object.
      */
     public StringMatcher(PartialMatchLengthUpdateValues<T> values) {
-        throw new RuntimeException("H7 - not implemented"); // TODO: H7 - remove if implemented
+        this.VALUES = values;
     }
 
     /**
@@ -29,6 +31,30 @@ public class StringMatcher<T> {
      * @return The list of calculated indices.
      */
     public List<Integer> findAllMatches(T[] source) {
-        throw new RuntimeException("H7 - not implemented"); // TODO: H7 - remove if implemented
+        var matches = new ArrayList<Integer>();
+        if(source.length == 0) return matches;
+        var potentialMatches = new HashMap<Integer, Integer>();
+        for(int i = 0; i<source.length; i++){
+            var toRemove = new ArrayList<Integer>();
+            for(var pm : potentialMatches.entrySet()){
+                var lm = VALUES.getPartialMatchLengthUpdate(pm.getValue(), source[i]);
+                if(lm == VALUES.getSearchStringLength()){
+                    matches.add(pm.getKey()+1);
+                    toRemove.add(pm.getKey());
+                } else if(lm == 0){
+                    toRemove.add(pm.getKey());
+                } else if(lm == pm.getValue()) {
+                    toRemove.add(pm.getKey());
+                } else {
+                    potentialMatches.computeIfPresent(pm.getKey(), (k,v) -> v=lm);
+                }
+            }
+            toRemove.stream().forEach(e -> potentialMatches.remove(e));
+            var localMatch = VALUES.getPartialMatchLengthUpdate(0, source[i]);
+            if(localMatch > 0){
+                potentialMatches.put(i, localMatch);
+            }
+        }
+        return matches;
     }
 }

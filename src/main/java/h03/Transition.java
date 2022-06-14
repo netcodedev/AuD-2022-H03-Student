@@ -25,6 +25,7 @@ public class Transition<T> {
      * @param letters The letters that will make this transition lead to the next state (j).
      */
     public Transition(int j, List<T> letters) {
-        throw new RuntimeException("H6 - not implemented"); // TODO: H6 - remove if implemented
+        this.J = j;
+        this.LETTERS = letters;
     }
 }

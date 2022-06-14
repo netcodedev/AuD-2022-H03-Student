@@ -18,9 +18,32 @@ public class PartialMatchLengthUpdateValuesAsMatrix<T> extends PartialMatchLengt
      * @param fct          The function to be used.
      * @param searchString The search string to be used.
      */
+    @SuppressWarnings("unchecked")
     public PartialMatchLengthUpdateValuesAsMatrix(FunctionToInt<T> fct, T[] searchString) {
-        super(null);
-        throw new RuntimeException("H5 - not implemented"); // TODO: H5 - remove if implemented
+        super(fct);
+        matrix = new int[searchString.length+1][fct.sizeOfAlphabet()];
+        for(int i = 0; i<=searchString.length; i++){
+            for(int j = 0; j<searchString.length; j++){
+                if(i<searchString.length && searchString[i] == searchString[j]){
+                    matrix[i][fct.apply(searchString[j])] = i+1;
+                } else {
+                    T[] substr = (T[])new Object[i+1];
+                    for(int k = 0; k<i;k++){
+                        substr[k] = searchString[k];
+                    }
+                    substr[i] = searchString[j];
+                    var match = computePartialMatchLengthUpdateValues(substr);
+                    if(match > 0){
+                        System.out.print("match: "+match+": ");
+                        for(int l = 0; l<substr.length; l++){
+                            System.out.print(substr[l]);
+                        }
+                        System.out.println();
+                    }
+                    matrix[i][fct.apply(searchString[j])] = match;
+                }
+            }
+        }
     }
 
     /**
@@ -28,7 +51,7 @@ public class PartialMatchLengthUpdateValuesAsMatrix<T> extends PartialMatchLengt
      */
     @Override
     public int getPartialMatchLengthUpdate(int state, T letter) {
-        throw new RuntimeException("H5 - not implemented"); // TODO: H5 - remove if implemented
+        return matrix[state][fct.apply(letter)];
     }
 
     /**
@@ -36,6 +59,6 @@ public class PartialMatchLengthUpdateValuesAsMatrix<T> extends PartialMatchLengt
      */
     @Override
     public int getSearchStringLength() {
-        throw new RuntimeException("H7 - not implemented"); // TODO: H7 - remove if implemented
+        return matrix.length-1;
     }
 }

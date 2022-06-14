@@ -17,7 +17,7 @@ public abstract class PartialMatchLengthUpdateValues<T> {
      * @param fct The function to be used by this object.
      */
     public PartialMatchLengthUpdateValues(FunctionToInt<T> fct) {
-        throw new RuntimeException("H4 - not implemented"); // TODO: H4 - remove if implemented
+        this.fct = fct;
     }
 
     /**
@@ -43,6 +43,23 @@ public abstract class PartialMatchLengthUpdateValues<T> {
      * @return The amount k.
      */
     protected int computePartialMatchLengthUpdateValues(T[] searchString) {
-        throw new RuntimeException("H4 - not implemented"); // TODO: H4 - remove if implemented
+        // Stolen from https://www.geeksforgeeks.org/longest-prefix-also-suffix/
+        // slightly adjusted to also cover overlaps
+        int n = searchString.length;
+        if(n<2){
+            return 0;
+        }
+        int len = 0;
+        int i = n/2;
+        while(i<n){
+            if(searchString[i] == searchString[len]){
+                ++len;
+                ++i;
+            } else {
+                i = i-len+1;
+                len = 0;
+            }
+        }
+        return len;
     }
 }
